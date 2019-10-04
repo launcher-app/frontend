@@ -11,6 +11,7 @@ import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
 import withStyles from '@material-ui/core/styles/withStyles'
 import CloseIcon from '@material-ui/icons/Close'
 import indigo from '@material-ui/core/colors/indigo'
@@ -26,6 +27,7 @@ import TabContainer from './components/TabContainer'
 import TimesheetContainer from './containers/TimesheetContainer'
 import PerformedTasksReportContainer from './containers/PerformedTasksReportContainer'
 import UserContainer from './containers/UserContainer'
+import UpdatePasswordsDialogContainer from './containers/UpdatePasswordsDialogContainer'
 import * as moment from 'moment'
 import 'moment/locale/pt-br'
 
@@ -75,6 +77,7 @@ const initialState = {
   isDraggingIssue: false,
   issueBeingDragged: undefined,
   isPerformedTasksDialogOpen: false,
+  isUpdatePasswordsDialogOpen: true,
   performedTasks: [],
   performedTasksType: undefined,
 }
@@ -134,6 +137,18 @@ class App extends Component {
     })
   }
 
+  handleOpenUpdatePasswordsDialog = () => {
+    this.setState({
+      isUpdatePasswordsDialogOpen: true,
+    })
+  }
+
+  handleCloseUpdatePasswordsDialog = () => {
+    this.setState({
+      isUpdatePasswordsDialogOpen: false,
+    })
+  }
+
   render = () => {
     const {
       isNightMode,
@@ -143,6 +158,7 @@ class App extends Component {
       performedTasks,
       performedTasksType,
       isPerformedTasksDialogOpen,
+      isUpdatePasswordsDialogOpen,
     } = this.state
 
     const {classes} = this.props
@@ -169,9 +185,16 @@ class App extends Component {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant="overline" color="inherit">
-                        <UserContainer enableMocks={enableMocks} />
-                      </Typography>
+                      <Grid container direction="row" justify="space-between" alignItems="center" spacing={16}>
+                        <Grid item>
+                          <Typography variant="overline" color="inherit">
+                            <UserContainer enableMocks={enableMocks} />
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Button size="small" color="secondary" onClick={this.handleOpenUpdatePasswordsDialog}>Atualizar senhas</Button>
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Toolbar>
@@ -254,6 +277,11 @@ class App extends Component {
                 performedTasksType={performedTasksType}
                 onCancel={this.handleCancelPerformedTasksDialog}
                 onClose={this.handleClosePerformedTasksDialog}
+              />
+
+              <UpdatePasswordsDialogContainer
+                isOpen={isUpdatePasswordsDialogOpen}
+                onClose={this.handleCloseUpdatePasswordsDialog}
               />
             </React.Fragment>
           </MuiPickersUtilsProvider>

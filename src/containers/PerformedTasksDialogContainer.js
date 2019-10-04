@@ -185,7 +185,7 @@ class PerformedTasksDialogContainer extends Component {
     const {activityId} = this.state
     const performedTasks = this.resolvePerformedTasks(activityId)
 
-    const launchParams = {
+    const postData = {
       activity_id: activityId,
       performed_tasks: performedTasks,
     }
@@ -193,7 +193,7 @@ class PerformedTasksDialogContainer extends Component {
     this.setState({isSendingPerformedTasks: true})
 
     wrappedAxios
-      .post(`/launch`, launchParams)
+      .post(`/launch`, postData)
       .then(response => {
         this.setState({
           thereIsServerErrorForLaunching: false,
@@ -203,6 +203,8 @@ class PerformedTasksDialogContainer extends Component {
 
         const messages = response.data.messages
         const isOkCallback = element => `OK` === element.message
+
+        // Cannot read property 'every' of undefined
         const isEveryMessageOk = messages.every(isOkCallback)
 
         if (isEveryMessageOk) {
