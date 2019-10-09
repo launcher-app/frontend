@@ -4,8 +4,8 @@ import AppBar from '@material-ui/core/AppBar'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
-import IconButton from '@material-ui/core/IconButton'
-import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider'
+// import IconButton from '@material-ui/core/IconButton'
+import {MuiPickersUtilsProvider} from '@material-ui/pickers'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
@@ -13,7 +13,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import withStyles from '@material-ui/core/styles/withStyles'
-import CloseIcon from '@material-ui/icons/Close'
+// import CloseIcon from '@material-ui/icons/Close'
 import indigo from '@material-ui/core/colors/indigo'
 import deepOrange from '@material-ui/core/colors/deepOrange'
 import SwipeableViews from 'react-swipeable-views'
@@ -31,7 +31,7 @@ import UpdatePasswordsDialogContainer from './containers/UpdatePasswordsDialogCo
 import * as moment from 'moment'
 import 'moment/locale/pt-br'
 
-const enableMocks = false
+const enableMocks = true
 
 const defaultThemeOptions = {
   typography: {
@@ -167,11 +167,7 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <SnackbarProvider maxSnack={4} action={
-          <IconButton key="close" aria-label="Close" color="inherit">
-            <CloseIcon />
-          </IconButton>
-        }>
+        <SnackbarProvider maxSnack={4}>
           <MuiPickersUtilsProvider utils={MomentUtils} moment={moment} locale="pt-br">
             <React.Fragment>
               <CssBaseline />
@@ -185,7 +181,7 @@ class App extends Component {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Grid container direction="row" justify="space-between" alignItems="center" spacing={16}>
+                      <Grid container direction="row" justify="space-between" alignItems="center" spacing={2}>
                         <Grid item>
                           <Typography variant="overline" color="inherit">
                             <UserContainer enableMocks={enableMocks} />
@@ -210,7 +206,7 @@ class App extends Component {
               </Tabs>
               <SwipeableViews axis="x" index={activeTab}>
                 <TabContainer>
-                  <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={16}>
+                  <Grid container direction="row" justify="space-between" alignItems="flex-start" spacing={2}>
                     <Grid item xs={8}>
                       <TimesheetContainer
                         enableMocks={enableMocks}
@@ -222,7 +218,7 @@ class App extends Component {
                       />
                     </Grid>
                     <Grid item xs={4}>
-                      <Grid container direction="column" spacing={16}>
+                      <Grid container direction="column" spacing={2}>
                         <Grid item xs={12}>
                           <JiraContainer
                             enableMocks={enableMocks}

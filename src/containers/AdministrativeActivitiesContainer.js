@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import DatePicker from 'material-ui-pickers/DatePicker'
+import {DatePicker} from '@material-ui/pickers'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import SendIcon from '@material-ui/icons/Send'
@@ -87,7 +87,7 @@ class AdministrativeActivitiesContainer extends Component {
           </Grid>
         </Toolbar>
         <LeftRightPaddedDiv>
-          <Grid container direction="row" justify="flex-start" alignItems="baseline" spacing={16}>
+          <Grid container direction="row" justify="flex-start" alignItems="baseline" spacing={3}>
             <Grid item>
               <DatePicker
                 label="Data inicial"

@@ -17,7 +17,7 @@ import Typography from '@material-ui/core/Typography'
 import AccessTimeIcon from '@material-ui/icons/AccessTime'
 import RefreshIcon from '@material-ui/icons/Refresh'
 import SendIcon from '@material-ui/icons/Send'
-import TimePicker from 'material-ui-pickers/TimePicker'
+import {KeyboardTimePicker} from '@material-ui/pickers'
 import TableWrapper from '../components/TableWrapper'
 import WorkedBalance from '../components/WorkedBalance'
 import ProblemMessage from '../components/ProblemMessage'
@@ -204,7 +204,7 @@ class TimesheetContainer extends Component {
     // noOp
   }
 
-  handleChangeTimePicker = (isArrival, date, dateIndex, recordIndex) => newValue => {
+  handleChangeTimePicker = (isArrival, date, dateIndex, recordIndex) => newDate => {
     const {timesheet} = this.state
 
     // Atribuindo novo valor
@@ -215,8 +215,8 @@ class TimesheetContainer extends Component {
 
     // Adiciona horas e minutos selecionados na data
     timesheet[dateIndex].records[recordIndex][isArrivalMap[isArrival]] = date.clone()
-      .add(newValue.hours(), `hours`)
-      .add(newValue.minutes(), `minutes`)
+      .add(newDate.hours(), `hours`)
+      .add(newDate.minutes(), `minutes`)
       .format(`YYYY-MM-DDTHH:mm:00ZZ`)
 
     // Atualiza o state
@@ -566,11 +566,8 @@ class TimesheetContainer extends Component {
                           </TableCell>
                         }
                         <TableCell style={{minWidth: 190}}>
-                          <TimePicker
-                            keyboard
-                            disableOpenOnEnter
+                          <KeyboardTimePicker
                             keyboardIcon={<AccessTimeIcon />}
-                            mask={this.timeMask}
                             invalidDateMessage={<em>Horário inválido</em>}
                             ampm={false}
                             cancelLabel="Cancelar"
@@ -579,11 +576,8 @@ class TimesheetContainer extends Component {
                           />
                         </TableCell>
                         <TableCell style={{minWidth: 190}}>
-                          <TimePicker
-                            keyboard
-                            disableOpenOnEnter
+                          <KeyboardTimePicker
                             keyboardIcon={<AccessTimeIcon />}
-                            mask={this.timeMask}
                             invalidDateMessage={<em>Horário inválido</em>}
                             ampm={false}
                             cancelLabel="Cancelar"

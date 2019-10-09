@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import TableWrapper from '../components/TableWrapper'
 import SendIcon from '@material-ui/icons/Send'
-import DatePicker from 'material-ui-pickers/DatePicker'
+import {DatePicker} from '@material-ui/pickers'
 import ProblemMessage from '../components/ProblemMessage'
 import wrappedAxios from '../wrappers/axios'
 import * as moment from 'moment'
@@ -129,7 +129,7 @@ class PerformedTasksReportContainer extends Component {
               </Typography>
             </Grid>
             <Grid item xs={6}>
-              <Grid container direction="row" justify="flex-end" alignItems="center" spacing={16}>
+              <Grid container direction="row" justify="flex-end" alignItems="center" spacing={2}>
                 <Grid item>
                   <DatePicker
                     showTodayButton

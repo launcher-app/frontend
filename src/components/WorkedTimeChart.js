@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import withTheme from '@material-ui/core/styles/withTheme';
+// import withTheme from '@material-ui/core/styles/withTheme';
 import {PieChart, Pie, Cell, ResponsiveContainer} from 'recharts'
+import deepOrange from '@material-ui/core/colors/deepOrange'
 
 class WorkedTimeChart extends Component {
   render = () => {
     const {
-      theme,
+      // theme,
       workedTime,
       timeToWork,
     } = this.props
@@ -16,7 +17,8 @@ class WorkedTimeChart extends Component {
       {name: `A trabalhar`, value: timeToWork},
     ]
 
-    const primaryColor = theme.palette.primary
+    // const primaryColor = theme.palette.primary
+    const primaryColor = deepOrange
 
     return (
       <ResponsiveContainer>
@@ -24,9 +26,9 @@ class WorkedTimeChart extends Component {
           <Pie
             data={data}
             dataKey="value"
-            innerRadius={30}
+            innerRadius={25}
             outerRadius={40}
-            paddingAngle={5}
+            paddingAngle={1}
           >
             <Cell fill={primaryColor[500]} />
             <Cell fill={primaryColor[100]} />
@@ -38,9 +40,9 @@ class WorkedTimeChart extends Component {
 }
 
 WorkedTimeChart.propTypes = {
-  theme: PropTypes.object.isRequired,
+  // theme: PropTypes.object.isRequired,
   workedTime: PropTypes.number.isRequired,
   timeToWork: PropTypes.number.isRequired,
 }
 
-export default withTheme()(WorkedTimeChart)
+export default WorkedTimeChart
