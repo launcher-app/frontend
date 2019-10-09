@@ -14,14 +14,12 @@ import wrappedAxios from '../wrappers/axios'
 
 const initialState = {
   jiraPassword: ``,
-  jiraPasswordConfirmation: ``,
-  isJiraPasswordMatchesConfirmation: false,
+  isJiraPasswordNotEmpty: false,
   isUpdatingJiraPassword: false,
   thereIsServerErrorForUpdatingJiraPassword: false,
 
   datainfoPassword: ``,
-  datainfoPasswordConfirmation: ``,
-  isDatainfoPasswordMatchesConfirmation: false,
+  isDatainfoPasswordNotEmpty: false,
   isUpdatingDatainfoPassword: false,
   thereIsServerErrorForUpdatingDatainfoPassword: false,
 }
@@ -84,14 +82,12 @@ class UpdatePasswordsDialogContainer extends Component {
   unlockSaveButtonUnlessMismatch = () => {
     const {
       jiraPassword,
-      jiraPasswordConfirmation,
       datainfoPassword,
-      datainfoPasswordConfirmation,
     } = this.state
 
     this.setState({
-      isJiraPasswordMatchesConfirmation: `` !== jiraPassword && jiraPassword === jiraPasswordConfirmation,
-      isDatainfoPasswordMatchesConfirmation: `` !== datainfoPassword && datainfoPassword === datainfoPasswordConfirmation,
+      isJiraPasswordNotEmpty: `` !== jiraPassword,
+      isDatainfoPasswordNotEmpty: `` !== datainfoPassword,
     })
   }
 
@@ -103,12 +99,12 @@ class UpdatePasswordsDialogContainer extends Component {
 
     const {
       jiraPassword,
-      isJiraPasswordMatchesConfirmation,
+      isJiraPasswordNotEmpty,
       isUpdatingJiraPassword,
       thereIsServerErrorForUpdatingJiraPassword,
 
       datainfoPassword,
-      isDatainfoPasswordMatchesConfirmation,
+      isDatainfoPasswordNotEmpty,
       isUpdatingDatainfoPassword,
       thereIsServerErrorForUpdatingDatainfoPassword,
     } = this.state
@@ -144,15 +140,6 @@ class UpdatePasswordsDialogContainer extends Component {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      id="jira-password-confirmation"
-                      label="Confirmação da senha do Jira"
-                      helperText="Campo em texto claro"
-                      onChange={this.handleChangePasswordField('jiraPasswordConfirmation')}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
                     <Grid
                       container
                       direction="row"
@@ -168,7 +155,7 @@ class UpdatePasswordsDialogContainer extends Component {
                         }
                       </Grid>
                       <Grid item>
-                        <Button onClick={this.handleSaveJiraPassword(jiraPassword, onClose)} color="primary" disabled={isUpdatingJiraPassword || !isJiraPasswordMatchesConfirmation}>
+                        <Button onClick={this.handleSaveJiraPassword(jiraPassword, onClose)} color="primary" disabled={isUpdatingJiraPassword || !isJiraPasswordNotEmpty}>
                           Salvar senha do Jira
                         </Button>
                       </Grid>
@@ -194,15 +181,6 @@ class UpdatePasswordsDialogContainer extends Component {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
-                      id="datainfo-password-confirmation"
-                      label="Confirmação da senha do Service"
-                      helperText="Campo em texto claro"
-                      onChange={this.handleChangePasswordField('datainfoPasswordConfirmation')}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
                     <Grid
                       container
                       direction="row"
@@ -218,7 +196,7 @@ class UpdatePasswordsDialogContainer extends Component {
                         }
                       </Grid>
                       <Grid item>
-                        <Button onClick={this.handleSaveDatainfoPassword(datainfoPassword, onClose)} color="primary" disabled={isUpdatingDatainfoPassword || !isDatainfoPasswordMatchesConfirmation}>
+                        <Button onClick={this.handleSaveDatainfoPassword(datainfoPassword, onClose)} color="primary" disabled={isUpdatingDatainfoPassword || !isDatainfoPasswordNotEmpty}>
                           Salvar senha do Service
                         </Button>
                       </Grid>

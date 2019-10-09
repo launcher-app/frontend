@@ -77,7 +77,7 @@ const initialState = {
   isDraggingIssue: false,
   issueBeingDragged: undefined,
   isPerformedTasksDialogOpen: false,
-  isUpdatePasswordsDialogOpen: true,
+  isUpdatePasswordsDialogOpen: false,
   performedTasks: [],
   performedTasksType: undefined,
 }
